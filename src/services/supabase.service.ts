@@ -10,10 +10,24 @@ import {environment} from '../environments/environment';
 
 export class SupabaseService{
     private supabase:SupabaseClient;
+    private currentSession: Session |null = null;
 
     constructor(){
         this.supabase = createClient(environment.supabaseUrl,environment.supabaseAnonKey);
+
+        //session changes (login/logout/refresh)
+        this.supabase.auth.onAuthStateChange((_event,session)=>{
+            this.currentSession = session;
+        });
     }
+
+    async getSession(): Promise<Session |null>{
+        const{data, error} = await this.supabase.auth.getSession();
+        if(error) throw error;
+        this.currentSession = data.session;
+        return data.session ?? null;
+    }
+
 
     async signUp(email:string, password:string): Promise<User | null>{
         const {data,error} = await this.supabase.auth.signUp({email,password});
