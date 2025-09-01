@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import {SupabaseService} from '../../services/supabase.service';
 import {User} from '@supabase/supabase-js';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class AuthComponent implements OnInit{
   password: string = '';
   user:User | null = null;
 
-  constructor(private supabase:SupabaseService){}
+  constructor(private supabase:SupabaseService, private router: Router){}
 
   async ngOnInit() {
       try{
@@ -32,7 +33,11 @@ export class AuthComponent implements OnInit{
     try{
       const user = await this.supabase.signUp(this.email,this.password);
       console.log("User registered:", user);
-      alert("User correctly registered!");
+      if(user){
+        alert("User correctly registered!");
+        this.router.navigate(['home']);
+      }
+
     } catch(error:any){
       console.error(error.message);
       alert(error.message);
