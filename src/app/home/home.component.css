@@ -2,3 +2,15 @@
     background-color: greenyellow;
     color:blue;
 }
+.main-scene{
+    background-color: antiquewhite;
+    height:90vh;
+    width:100%;
+}
+.time-line{
+    position:absolute;
+    bottom:0px;
+    background-color: orange;
+    width:80vh;
+    height:100px;
+}
