@@ -33,10 +33,7 @@ export class AuthComponent implements OnInit{
     try{
       const user = await this.supabase.signUp(this.email,this.password);
       console.log("User registered:", user);
-      if(user){
-        alert("User correctly registered!");
-        this.router.navigate(['home']);
-      }
+      alert("User correctly registered!");
 
     } catch(error:any){
       console.error(error.message);
@@ -48,7 +45,10 @@ export class AuthComponent implements OnInit{
     try{
       const user = await this.supabase.signIn(this.email, this.password);
       console.log("user signed in:",user);
-      alert("User Loged correctly!");
+      if(user){
+        alert("User Loged correctly!");
+        this.router.navigate(['/home']);
+      }
     }catch(error:any){
       console.error(error.message);
       alert(error.message);
