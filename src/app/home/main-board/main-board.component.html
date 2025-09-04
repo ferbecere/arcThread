@@ -1,30 +1,33 @@
 <div class="main-board">
     <h2>zona de interacción</h2>
-    <p>Aquí apareceran las tarjetas de personajes mundos y eventos.</p>
+    <!-- <p>Aquí apareceran las tarjetas de personajes mundos y eventos.</p> -->
 
-<div class="characters">
-    <app-character-card *ngFor="let char of characters"
-        [name]="char.name"
-        [alias]="char.alias"
-        [avatarUrl]="char.avatarUrl"
-        [role]="char.role">
-    </app-character-card>
+    <div class="characters">
+        <div *ngFor="let char of characters" cdkDrag>
+            <app-character-card 
+                [name]="char.name"
+                [alias]="char.alias"
+                [avatarUrl]="char.avatarUrl"
+                [role]="char.role">
+            </app-character-card>
+        </div>
+    </div>
 
-</div>
+    <div class="worlds">
+        <div *ngFor="let world of worlds" cdkDrag>
+            <app-world-card 
+                [name]="world.name"
+                [description]="world.description">
+            </app-world-card>
+        </div>
+    </div>
 
-<div class="worlds">
-    <app-world-card *ngFor="let world of worlds"
-        [name]="world.name"
-        [description]="world.description">
-    </app-world-card>
-
-</div>
-
-<div class="events">
-    <app-event-node *ngFor="let event of events"
-        [title]="event.title"
-        [description]="event.description">
-
-    </app-event-node>
-</div>
+    <div class="events">
+        <div *ngFor="let event of events" cdkDrag>
+            <app-event-node 
+                [title]="event.title"
+                [description]="event.description">
+            </app-event-node>
+        </div>
+    </div>
 </div>

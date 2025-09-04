@@ -5,9 +5,9 @@ import { MainBoardComponent } from "./main-board/main-board.component";
 import { RightSidebarComponent } from "./right-sidebar/right-sidebar.component";
 import { TimeThreadComponent } from "./time-thread/time-thread.component";
 
-import { CharacterCardComponent } from "./character-card/character-card.component";
-import { WorldCardComponent } from "./world-card/world-card.component";
-import { EventNodeComponent } from "./event-node/event-node.component";
+// import { CharacterCardComponent } from "./character-card/character-card.component";
+// import { WorldCardComponent } from "./world-card/world-card.component";
+// import { EventNodeComponent } from "./event-node/event-node.component";
 
 @Component({
     selector:'app-home',
@@ -19,9 +19,9 @@ import { EventNodeComponent } from "./event-node/event-node.component";
         MainBoardComponent,
         RightSidebarComponent,
         TimeThreadComponent,
-        CharacterCardComponent,
-        WorldCardComponent,
-        EventNodeComponent
+        // CharacterCardComponent,
+        // WorldCardComponent,
+        // EventNodeComponent
     ]
 })
 
