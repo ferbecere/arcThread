@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { SupabaseService } from '../../services/supabase.service';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,16 @@ export class HeaderComponent {
     private router:Router){
       this.checkAuthState();
     }
+
+  ngOnInit():void{
+    this.checkAuthState();
+    this.getInitialSession();
+  }
+
+  async getInitialSession(){
+    const session = await this.supabase.getSession();
+    this.currentUser = session?.user?.email ?? null;
+  }
 
   async onSignIn(){
     try{
