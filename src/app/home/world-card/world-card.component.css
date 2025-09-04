@@ -1,0 +1,8 @@
+.world-card{
+    border: 1px solid #888;
+    border-radius: 6px;
+    padding:0.5rem;
+    margin:0.5rem;
+    width:180px;
+    background-color: #e3f2fd;
+}

@@ -1,0 +1,6 @@
+<div class="character-card">
+    <img *ngIf="avatarUrl" [src]=" avatarUrl" alt="{{name}}" class="avatar"/>
+    <h3>{{name}}</h3>
+    <p *ngIf="alias">Alias:{{alias}} </p>
+    <p *ngIf="role">Role:{{role}} </p>
+</div>
