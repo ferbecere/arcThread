@@ -1,0 +1,20 @@
+.left-sidebar{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+}
+
+.filters{
+    margin-bottom:20px;
+}
+
+.dynamic-card{
+    margin-top:auto;
+    background-color: aquamarine;
+    padding:10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
