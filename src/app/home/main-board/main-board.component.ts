@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
-import { CharacterCardComponent } from '../character-card/character-card.component';
-import { WorldCardComponent } from '../world-card/world-card.component';
-import { EventNodeComponent } from '../event-node/event-node.component';
+import { CharacterCardComponent } from '../characters/character-card/character-card.component';
+import { WorldCardComponent } from '../worlds/world-card/world-card.component';
+import { EventNodeComponent } from '../events/event-node/event-node.component';
 
 @Component({
   selector: 'app-main-board',

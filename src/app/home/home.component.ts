@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 
-import { LeftSidebarComponent } from "./left-sidebar/left-sidebar.component";
+import { LeftSidebarComponent } from "./sidebars/left-sidebar/left-sidebar.component";
 import { MainBoardComponent } from "./main-board/main-board.component";
-import { RightSidebarComponent } from "./right-sidebar/right-sidebar.component";
+import { RightSidebarComponent } from "./sidebars/right-sidebar/right-sidebar.component";
 import { TimeThreadComponent } from "./time-thread/time-thread.component";
 
 // import { CharacterCardComponent } from "./character-card/character-card.component";
