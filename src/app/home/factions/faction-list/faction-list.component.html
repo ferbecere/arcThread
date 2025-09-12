@@ -1,1 +1,18 @@
-<p>faction-list works!</p>
+<div *ngIf="loading"> Loading Factions...</div>
+<div *ngIF="error">{{error}}</div>
+
+
+<div class="factions-grid" *ngIf="!loading && !error">
+    <div *ngFor="let faction of factions">
+        <app-faction-card
+            [name]="faction.name"
+            [description]="faction.description">
+        </app-faction-card>
+
+
+        <button (click)="deleteFaction(faction.id)">Delete</button>
+        <!-- faltarán las demás opciones de crud, poma  -->
+
+    </div>
+
+</div>

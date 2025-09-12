@@ -1,1 +1,14 @@
-<p>event-list works!</p>
+<div *ngIf="loading">Loading events</div>
+<div *ngIf="error">{{error}}</div>
+<div class="events-grid" *ngIf="!loading && !error">
+    <app-event-node
+    *ngFor="let event of events"
+    [title] = "event.title"
+    [chapter] = "event.chapter"
+    [year] = "event.year"
+    [relevance] = "event.relevance"
+    [act] = "event.act"
+    >
+    </app-event-node>
+
+</div>

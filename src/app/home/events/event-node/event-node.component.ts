@@ -11,7 +11,11 @@ import { CommonModule } from '@angular/common';
 })
 export class EventNodeComponent {
   @Input() title!: string;
+  @Input() chapter?: string;
+  @Input() year?: string;
   @Input() description?: string;
+  @Input() relevance?: boolean;
   @Input() imageUrl?: string;
+  @Input() act?: string;
 }
 
