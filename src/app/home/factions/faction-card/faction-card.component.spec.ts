@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorldListComponent } from './world-list.component';
+import { FactionCardComponent } from './faction-card.component';
 
-describe('WorldListComponent', () => {
-  let component: WorldListComponent;
-  let fixture: ComponentFixture<WorldListComponent>;
+describe('FactionCardComponent', () => {
+  let component: FactionCardComponent;
+  let fixture: ComponentFixture<FactionCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorldListComponent]
+      imports: [FactionCardComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WorldListComponent);
+    fixture = TestBed.createComponent(FactionCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

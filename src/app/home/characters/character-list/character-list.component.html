@@ -1,14 +1,14 @@
 <div *ngIf="loading">Loading Characters...</div>
 <div *ngIf="error">{{error}}</div>
 
-<div class="characters-grid" *ngIf="!loading && !error"">
+<div class="characters-grid" *ngIf="!loading && !error">
 
-<app-character-cad
+<app-character-card
     *ngFor="let character of characters"
     [name]="character.full_name"
     [alias]="character.alias"
     [avatarUrl]="character.avatar"
     [role]="character.role"
 
-></app-character-cad>
+></app-character-card>
 </div>

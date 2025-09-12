@@ -2,7 +2,15 @@
     <h2>zona de interacción</h2>
     <!-- <p>Aquí apareceran las tarjetas de personajes mundos y eventos.</p> -->
 
-    <div class="characters">
+
+<app-character-list></app-character-list>
+<app-faction-list></app-faction-list>
+<app-event-list></app-event-list> 
+
+
+
+
+    <!-- <div class="characters">
         <div *ngFor="let char of characters" cdkDrag [cdkDragBoundary]="board">
             <app-character-card 
                 [name]="char.name"
@@ -29,5 +37,5 @@
                 [description]="event.description">
             </app-event-node>
         </div>
-    </div>
+    </div> -->
 </div>
