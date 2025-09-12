@@ -1,1 +1,14 @@
-<p>character-list works!</p>
+<div *ngIf="loading">Loading Characters...</div>
+<div *ngIf="error">{{error}}</div>
+
+<div class="characters-grid" *ngIf="!loading && !error"">
+
+<app-character-cad
+    *ngFor="let character of characters"
+    [name]="character.full_name"
+    [alias]="character.alias"
+    [avatarUrl]="character.avatar"
+    [role]="character.role"
+
+></app-character-cad>
+</div>
