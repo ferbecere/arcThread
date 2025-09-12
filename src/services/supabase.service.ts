@@ -21,6 +21,11 @@ export class SupabaseService{
         });
     }
 
+    get client(): SupabaseClient{
+        return this.supabase;
+    }
+
+
     async getSession(): Promise<Session |null>{
         const{data, error} = await this.supabase.auth.getSession();
         if(error) throw error;
