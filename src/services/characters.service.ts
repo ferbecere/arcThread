@@ -24,7 +24,7 @@ export class CharacterService{
     async addCharacter(character:any){
         const{data, error}= await this.supabaseService.client
         .from('characters')
-        .insert(character)
+        .insert([character])
         .select();
         if(error) throw error;
         return data;
