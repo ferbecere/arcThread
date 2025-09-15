@@ -7,7 +7,11 @@ import { EventListComponent } from '../events/event-list/event-list.component';
 import { FactionListComponent } from '../factions/faction-list/faction-list.component';
 
 import { CreateCardButtonComponent } from './create-card-button/create-card-button.component';
+import { CardFormModalComponent } from './card-form-modal/card-form-modal.component';
+
 import { CharacterService } from '../../../services/characters.service';
+import { FactionsService, Faction } from '../../../services/factions.service';
+import { EventService } from '../../../services/event.service';
 
 // import { CharacterCardComponent } from '../characters/character-card/character-card.component';
 // import { WorldCardComponent } from '../worlds/world-card/world-card.component';
@@ -16,25 +20,69 @@ import { CharacterService } from '../../../services/characters.service';
 @Component({
   selector: 'app-main-board',
   standalone:true,
-  imports: [CommonModule,CharacterListComponent,DragDropModule,FactionListComponent,EventListComponent,CreateCardButtonComponent],
+  imports: [CommonModule,CharacterListComponent,DragDropModule,FactionListComponent,EventListComponent,CreateCardButtonComponent,CardFormModalComponent],
   templateUrl: './main-board.component.html',
   styleUrl: './main-board.component.css'
 })
 export class MainBoardComponent {
 
+  showModal = false;
+  modalType: 'character' | 'faction' | 'event' = 'character';
+
   characters: any[] = [];
-  constructor(private characterService: CharacterService){}
+  factions: Faction[] = [];
+  events: any[] = [];
 
-  onCreate(type: string) {
-     if (type === 'character') {
-      // Abrir formulario/modal de nuevo personaje
-      console.log('Abrir formulario para crear personaje');
-      // Aquí puedes mostrar un modal o un componente de formulario
-    } else if (type === 'faction') {
-      console.log('Abrir formulario para crear facción');
-    } else if (type === 'event') {
-      console.log('Abrir formulario para crear evento');
-    }
 
-}
+  constructor(
+    private characterService: CharacterService,
+    private factionService: FactionsService,
+    private eventService: EventService
+
+  ){}
+
+  ngOnInit(){
+    this.loadAll();
+  }
+
+  async loadAll(){
+    this.characters = await this.characterService.getCharacters();
+    this.factions = await this.factionService.getFactions();
+    this.events = await this.eventService.getEvents();
+    
+  }
+
+
+
+  openModal(type: 'character' | 'faction' | 'event'){
+    this.modalType = type;
+    this.showModal = true;
+  };
+
+  closeModal(){
+    this.showModal = false;
+  }
+
+  async handleCreate(data: any){
+
+    switch(this.modalType){
+      case 'character':
+        const createdChar = await this.characterService.addCharacter(data);
+        this.characters = [...this.characters, ...createdChar];
+        break;
+
+      case 'faction':
+        const createdFaction = await this.factionService.createFaction(data);
+        this.factions = [...this.factions, createdFaction];
+        break;
+      
+      case 'event':
+        const createdEvent = await this.eventService.addEvent(data);
+        this.events = [...this.events, ...createdEvent];
+        break;
+   
+
+  }
+ this.closeModal()
+  }
 }

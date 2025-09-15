@@ -1,0 +1,68 @@
+<div class="modal-backdrop">
+    <div class="modal-content">
+        <h3>Add a new {{type}} to the board</h3>
+
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+
+  <!-- Character -->
+  <div *ngIf="type === 'character'">
+    <input formControlName="name" placeholder="Nombre" required />
+    <input formControlName="alias" placeholder="Alias" />
+    <input formControlName="avatar_url" placeholder="Avatar URL" />
+    <input formControlName="role" placeholder="Rol" />
+    <input formControlName="status" placeholder="Status" />
+    <input formControlName="gender_identity" placeholder="Género" />
+    <input formControlName="birthdate" type="date" placeholder="Fecha de nacimiento" />
+    <input type="checkbox" formControlName="birthdate_approx" /> Fecha aproximada
+    <textarea formControlName="personality" placeholder="Personalidad"></textarea>
+    <textarea formControlName="biography" placeholder="Biografía"></textarea>
+    <textarea formControlName="development" placeholder="Desarrollo"></textarea>
+    <textarea formControlName="motivation" placeholder="Motivación"></textarea>
+    <textarea formControlName="conflict" placeholder="Conflicto"></textarea>
+    <textarea formControlName="appearance" placeholder="Apariencia"></textarea>
+    <input formControlName="profession" placeholder="Profesión" />
+    <input formControlName="origin" placeholder="Origen" />
+    <input formControlName="motto" placeholder="Lema" />
+    <textarea formControlName="inventory" placeholder="Inventario"></textarea>
+    <input formControlName="power_level" placeholder="Nivel de poder" />
+    <textarea formControlName="secret" placeholder="Secreto"></textarea>
+    <textarea formControlName="chronology_notes" placeholder="Notas de cronología"></textarea>
+  </div>
+
+  <!-- Faction -->
+  <div *ngIf="type === 'faction'">
+    <input formControlName="name" placeholder="Nombre" required />
+    <input formControlName="alt_names" placeholder="Nombres alternativos" />
+    <input formControlName="type" placeholder="Tipo" />
+    <input formControlName="symbol_url" placeholder="URL Emblema" />
+    <textarea formControlName="description" placeholder="Descripción"></textarea>
+    <textarea formControlName="culture" placeholder="Cultura"></textarea>
+    <textarea formControlName="history" placeholder="Historia"></textarea>
+    <textarea formControlName="politics" placeholder="Política"></textarea>
+    <textarea formControlName="economy" placeholder="Economía"></textarea>
+    <textarea formControlName="territory" placeholder="Territorio"></textarea>
+    <textarea formControlName="technology" placeholder="Tecnología"></textarea>
+    <textarea formControlName="motto" placeholder="Lema"></textarea>
+    <textarea formControlName="religion" placeholder="Religión"></textarea>
+    <textarea formControlName="laws" placeholder="Leyes"></textarea>
+    <textarea formControlName="narrative_role" placeholder="Rol narrativo"></textarea>
+    <textarea formControlName="current_conflict" placeholder="Conflicto actual"></textarea>
+    <textarea formControlName="motivation" placeholder="Motivación"></textarea>
+  </div>
+
+  <!-- Event -->
+  <div *ngIf="type === 'event'">
+    <input formControlName="title" placeholder="Título" required />
+    <input formControlName="chapter" placeholder="Capítulo" />
+    <input formControlName="year" type="number" placeholder="Año" />
+    <input formControlName="act" placeholder="Acto" />
+    <textarea formControlName="description" placeholder="Descripción"></textarea>
+    <input type="checkbox" formControlName="key_event" /> Evento clave
+  </div>
+
+  <button type="submit">Guardar</button>
+  <button type="button" (click)="cancel()">Cancelar</button>
+</form>
+
+    </div>
+</div>

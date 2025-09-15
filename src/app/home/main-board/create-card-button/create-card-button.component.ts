@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './create-card-button.component.css'
 })
 export class CreateCardButtonComponent {
-  @Output() create = new EventEmitter<string>();
+  @Output() create = new EventEmitter<'character' | 'faction' | 'event'>();
 
 
   expanded = false;

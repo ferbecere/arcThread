@@ -7,35 +7,14 @@
 <app-faction-list></app-faction-list>
 <app-event-list></app-event-list> 
 
-<app-create-card-button (create)="onCreate($event)"></app-create-card-button>
+<app-create-card-button (create)="openModal($event)"></app-create-card-button>
 
 
-    <!-- <div class="characters">
-        <div *ngFor="let char of characters" cdkDrag [cdkDragBoundary]="board">
-            <app-character-card 
-                [name]="char.name"
-                [alias]="char.alias"
-                [avatarUrl]="char.avatarUrl"
-                [role]="char.role">
-            </app-character-card>
-        </div>
-    </div>
+<app-card-form-modal
+  *ngIf="showModal"
+  [type]="modalType"
+  (create)="handleCreate($event)"
+  (closed)="closeModal()"
+></app-card-form-modal>
 
-    <div class="worlds">
-        <div *ngFor="let world of worlds" cdkDrag [cdkDragBoundary]="board">
-            <app-world-card 
-                [name]="world.name"
-                [description]="world.description">
-            </app-world-card>
-        </div>
-    </div>
-
-    <div class="events">
-        <div *ngFor="let event of events" cdkDrag [cdkDragBoundary]="board">
-            <app-event-node 
-                [title]="event.title"
-                [description]="event.description">
-            </app-event-node>
-        </div>
-    </div> -->
 </div>
