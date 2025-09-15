@@ -1,0 +1,12 @@
+<div class="create-card-button">
+    <button class="fab-main" (click)="toggleMenu()">
+        +
+    </button>
+
+    <div class="fab-menu" *ngIf="expanded">
+        <button class="fab-sub character" (click)="createCharacter()">char.</button>
+        <button class="fab-sub faction" (click)="createFaction()">fact.</button>
+        <button class="fab-sub event" (click)="createEvent()">event</button>
+
+    </div>
+</div>
