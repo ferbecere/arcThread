@@ -2,67 +2,47 @@
     <div class="modal-content">
         <h3>Add a new {{type}} to the board</h3>
 
-<form [formGroup]="form" (ngSubmit)="submitForm()">
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
 
-  <!-- Character -->
-  <div *ngIf="type === 'character'">
-    <input formControlName="name" placeholder="Nombre" required />
-    <input formControlName="alias" placeholder="Alias" />
-    <input formControlName="avatar_url" placeholder="Avatar URL" />
-    <input formControlName="role" placeholder="Rol" />
-    <input formControlName="status" placeholder="Status" />
-    <input formControlName="gender_identity" placeholder="Género" />
-    <input formControlName="birthdate" type="date" placeholder="Fecha de nacimiento" />
-    <input type="checkbox" formControlName="birthdate_approx" /> Fecha aproximada
-    <textarea formControlName="personality" placeholder="Personalidad"></textarea>
-    <textarea formControlName="biography" placeholder="Biografía"></textarea>
-    <textarea formControlName="development" placeholder="Desarrollo"></textarea>
-    <textarea formControlName="motivation" placeholder="Motivación"></textarea>
-    <textarea formControlName="conflict" placeholder="Conflicto"></textarea>
-    <textarea formControlName="appearance" placeholder="Apariencia"></textarea>
-    <input formControlName="profession" placeholder="Profesión" />
-    <input formControlName="origin" placeholder="Origen" />
-    <input formControlName="motto" placeholder="Lema" />
-    <textarea formControlName="inventory" placeholder="Inventario"></textarea>
-    <input formControlName="power_level" placeholder="Nivel de poder" />
-    <textarea formControlName="secret" placeholder="Secreto"></textarea>
-    <textarea formControlName="chronology_notes" placeholder="Notas de cronología"></textarea>
-  </div>
+          <!-- Character -->
+          <div *ngIf="type === 'character'">
+            <input formControlName="name" placeholder="Character's Name" required />
+            <input formControlName="alias" placeholder="Alias/es if any (comma separated)" />
+            <input formControlName="avatar_url" placeholder="Avatar URL" />
+            <input formControlName="role" placeholder="Role" />
+            <input formControlName="birthdate" type="date" placeholder="the birdthdate can be aproximated" />
+            <textarea formControlName="personality_motivation" placeholder="Character's personality and motivations"></textarea>
+            <textarea formControlName="biography_development" placeholder="Character's biography and development at the moment"></textarea>
+            <textarea formControlName="appearance" placeholder="Appearance"></textarea>
+          </div>
 
-  <!-- Faction -->
-  <div *ngIf="type === 'faction'">
-    <input formControlName="name" placeholder="Nombre" required />
-    <input formControlName="alt_names" placeholder="Nombres alternativos" />
-    <input formControlName="type" placeholder="Tipo" />
-    <input formControlName="symbol_url" placeholder="URL Emblema" />
-    <textarea formControlName="description" placeholder="Descripción"></textarea>
-    <textarea formControlName="culture" placeholder="Cultura"></textarea>
-    <textarea formControlName="history" placeholder="Historia"></textarea>
-    <textarea formControlName="politics" placeholder="Política"></textarea>
-    <textarea formControlName="economy" placeholder="Economía"></textarea>
-    <textarea formControlName="territory" placeholder="Territorio"></textarea>
-    <textarea formControlName="technology" placeholder="Tecnología"></textarea>
-    <textarea formControlName="motto" placeholder="Lema"></textarea>
-    <textarea formControlName="religion" placeholder="Religión"></textarea>
-    <textarea formControlName="laws" placeholder="Leyes"></textarea>
-    <textarea formControlName="narrative_role" placeholder="Rol narrativo"></textarea>
-    <textarea formControlName="current_conflict" placeholder="Conflicto actual"></textarea>
-    <textarea formControlName="motivation" placeholder="Motivación"></textarea>
-  </div>
+          <!-- Faction -->
+          <div *ngIf="type === 'faction'">
+            <input formControlName="name" placeholder="Faction's Name" required />
+            <input formControlName="alt_names" placeholder="Alternative names for the faction (comma separated)" />
+            <input formControlName="type" placeholder="Tipo" />
+            <input formControlName="symbol_url" placeholder="URL from factions emblem/flag/logo/image" />
+            <textarea formControlName="description_culture" placeholder="Faction's distinc culture, history, religion..."></textarea>
+            <textarea formControlName="description_territory" placeholder="Faction's territory, political intricacies and relevant laws..."></textarea>
+            <textarea formControlName="description_technology" placeholder="Faction's economical and technological system"></textarea>
+            <textarea formControlName="motivation" placeholder="Main faction's motivations"></textarea>
+            <input formControlName="leaders" placeholder="Faction relevant Leadrs (comma separated)" />
+            <input formControlName="characters_associated" placeholder="Relevant characters associated with this faction" />
+          </div>
 
-  <!-- Event -->
-  <div *ngIf="type === 'event'">
-    <input formControlName="title" placeholder="Título" required />
-    <input formControlName="chapter" placeholder="Capítulo" />
-    <input formControlName="year" type="number" placeholder="Año" />
-    <input formControlName="act" placeholder="Acto" />
-    <textarea formControlName="description" placeholder="Descripción"></textarea>
-    <input type="checkbox" formControlName="key_event" /> Evento clave
-  </div>
+          <!-- Event -->
+          <div *ngIf="type === 'event'">
+            <input formControlName="title" placeholder="Chapter/event title" required />
+            <input formControlName="chapter" placeholder="Number of Chapter (if needed)" />
+            <input formControlName="year" type="number" placeholder="Event's year" />
+            <input formControlName="act" placeholder="Act (if needed)" />
+            <textarea formControlName="description" placeholder="Brief description of the key_event"></textarea>
+            <input type="checkbox" formControlName="key_event" /> is this a Key event?
+          </div>
 
-  <button type="submit">Guardar</button>
-  <button type="button" (click)="cancel()">Cancelar</button>
-</form>
+          <button type="submit">Add the new {{type}}</button>
+          <button type="button" (click)="cancel()">Cancel</button>
+        </form>
 
     </div>
 </div>
