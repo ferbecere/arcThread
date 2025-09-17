@@ -36,8 +36,7 @@ export class CardFormModalComponent {
             avatar_url: [''],
             birthdate: [''],
             role: [''],
-            status: ['activo'],
-            personality_motivation: [''],
+            personality_motivation:[''],
             biography_development: [''],
             appearance: ['']
           

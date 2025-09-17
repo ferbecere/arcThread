@@ -9,7 +9,7 @@ import { FactionListComponent } from '../factions/faction-list/faction-list.comp
 import { CreateCardButtonComponent } from './create-card-button/create-card-button.component';
 import { CardFormModalComponent } from './card-form-modal/card-form-modal.component';
 
-import { CharacterService } from '../../../services/characters.service';
+import { CharactersService } from '../../../services/characters.service';
 import { FactionsService } from '../../../services/factions.service';
 import { EventService } from '../../../services/event.service';
 import { Character } from '../../../models/character.model';
@@ -36,10 +36,9 @@ export class MainBoardComponent {
   factions: Faction[] = [];
   events: Event[] = [];
 
-
   constructor(
-    private characterService: CharacterService,
-    private factionService: FactionsService,
+    private charactersService: CharactersService,
+    private factionsService: FactionsService,
     private eventService: EventService
 
   ){}
@@ -49,13 +48,11 @@ export class MainBoardComponent {
   }
 
   async loadAll(){
-    this.characters = await this.characterService.getCharacters();
-    this.factions = await this.factionService.getFactions();
+    this.characters = await this.charactersService.getCharacters();
+    this.factions = await this.factionsService.getFactions();
     this.events = await this.eventService.getEvents();
     
   }
-
-
 
   openModal(type: 'character' | 'faction' | 'event'){
     this.modalType = type;
@@ -66,16 +63,32 @@ export class MainBoardComponent {
     this.showModal = false;
   }
 
-  async handleCreate(data: any){
+  async handleCreate(data: Character | Faction | Event){
 
     switch(this.modalType){
       case 'character':
-        const newChar = await this.characterService.addCharacter(data);
+        const newChar = await this.charactersService.addCharacter(data);
         this.characters.push(newChar);
         break;
 
       case 'faction':
-        const newFaction = await this.factionService.createFaction(data);
+        const factionData = {...data} as Faction & {
+          alt_names?: string | string[];
+          leaders?: string | string[];
+          characters_associated?: string | string[];
+        };
+
+        if(typeof factionData.alt_names === 'string'){
+          factionData.alt_names = factionData.alt_names.split(',').map((s:string)=>s.trim());
+        }
+        if(typeof factionData.leaders === 'string'){
+          factionData.leaders = factionData.leaders.split(',').map((s:string)=> s.trim());
+        }
+        if(typeof factionData.characters_associated === 'string'){
+          factionData.characters_associated = factionData.characters_associated.split(',').map((s:string)=>s.trim());
+        }
+
+        const newFaction = await this.factionsService.createFaction(factionData);
         this.factions.push(newFaction);
         break;
       

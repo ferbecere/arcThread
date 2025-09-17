@@ -7,7 +7,7 @@ import { Character } from "../models/character.model";
     providedIn: 'root'
 })
 
-export class CharacterService{
+export class CharactersService{
     constructor(private supabaseService: SupabaseService){}
     
     async getCharacters():Promise<Character[]>{

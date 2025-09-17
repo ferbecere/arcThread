@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CharacterService } from '../../../../services/characters.service';
+import { CharactersService } from '../../../../services/characters.service';
 import { CharacterCardComponent } from '../character-card/character-card.component';
 
 @Component({
@@ -15,12 +15,12 @@ export class CharacterListComponent implements OnInit{
   loading = true;
   error: string | null = null;
 
-  constructor(private characterService: CharacterService){}
+  constructor(private charactersService: CharactersService){}
 
   async ngOnInit(){
       
     try{
-      this.characters = await this.characterService.getCharacters();
+      this.characters = await this.charactersService.getCharacters();
     
     } catch(err:any){
       this.error = err.message ?? 'Loading Characters error';

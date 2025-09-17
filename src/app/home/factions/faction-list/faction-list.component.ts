@@ -7,6 +7,7 @@ import { FactionCardComponent } from '../faction-card/faction-card.component';
 
 @Component({
   selector: 'app-faction-list',
+  standalone:true,
   imports: [CommonModule, FactionCardComponent],
   templateUrl: './faction-list.component.html',
   styleUrl: './faction-list.component.css'
