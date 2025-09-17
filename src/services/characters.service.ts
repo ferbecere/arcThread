@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { SupabaseService } from "./supabase.service";
+import { Character } from "../models/character.model";
 
 
 @Injectable({
@@ -9,25 +10,57 @@ import { SupabaseService } from "./supabase.service";
 export class CharacterService{
     constructor(private supabaseService: SupabaseService){}
     
-    async getCharacters(){
+    async getCharacters():Promise<Character[]>{
         const {data, error} = await this.supabaseService.client
         .from('characters')
         .select('*');
 
-        if(error){
-            console.error('Error fetching characters:', error);
-            throw error;
-        }
-        return data;
+        if(error) throw error;
+        return data as Character[];
     }
 
-    async addCharacter(character:any){
+    async getCharacterById(id: string): Promise<Character | null> {
+        const { data, error } = await this.supabaseService.client
+        .from('characters')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+        if (error) throw error;
+        return data as Character | null;
+    }
+
+
+    async addCharacter(character:Partial<Character>):Promise<Character>{
         const{data, error}= await this.supabaseService.client
         .from('characters')
         .insert([character])
-        .select();
+        .select()
+        .single();
+
         if(error) throw error;
-        return data;
+        return data as Character;
+    }
+
+    async updateCharacter(id:string, updates:Partial<Character>): Promise<Character>{
+        const {data, error} = await this.supabaseService.client
+        .from('characters')
+        .update(updates)
+        .eq('id',id)
+        .select()
+        .single();
+
+        if(error) throw error;
+        return data as Character;
+
+    }
+
+    async deleteCharacter(id:string): Promise<void>{
+        const {error} = await this.supabaseService.client
+        .from('characters')
+        .delete()
+        .eq('id',id);
+        if(error) throw error;
     }
 }
 

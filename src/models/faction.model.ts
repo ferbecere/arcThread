@@ -1,0 +1,14 @@
+export interface Faction {
+    id?: string;
+    name: string;
+    alt_names?: string[];
+    parent_id?: string;
+    symbol_url?: string;
+    description_culture?:string,
+    description_territory?:string;
+    description_tecnology?:string;
+    motivation?:string;
+    leaders?:string[];
+    characters_associated?:string[];
+    created_at?:string;
+}

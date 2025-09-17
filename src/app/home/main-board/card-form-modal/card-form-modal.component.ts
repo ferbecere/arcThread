@@ -37,20 +37,10 @@ export class CardFormModalComponent {
           status: ['activo'],
           gender_identity: [''],
           birthdate: [''],
-          birthdate_approx: [false],
-          personality: [''],
-          biography: [''],
-          development: [''],
-          motivation: [''],
-          conflict: [''],
-          appearance: [''],
-          profession: [''],
-          origin: [''],
-          motto: [''],
-          inventory: [[]],
-          power_level: [''],
-          secret: [''],
-          chronology_notes: ['']
+          personality_motivation: [''],
+          biography_development: [''],
+          appearance: ['']
+         
       });
       break;
 
@@ -58,21 +48,13 @@ export class CardFormModalComponent {
       this.form = this.fb.group({
           name: ['', Validators.required],
           alt_names: [[]],
-          type: [''],
           symbol_url: [''],
-          description: [''],
-          culture: [''],
-          history: [''],
-          politics: [''],
-          economy: [''],
-          territory: [''],
-          technology: [''],
-          motto: [''],
-          religion: [''],
-          laws: [''],
-          narrative_role: [''],
-          current_conflict: [''],
-          motivation: ['']
+          description_culture: [''],
+          description_territory: [''],
+          description_technology: [''],
+          motivation: [''],
+          leaders: [''],
+          characters_associated: [''],
         });
       break;
 

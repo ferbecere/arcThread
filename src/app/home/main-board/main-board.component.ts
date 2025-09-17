@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -10,8 +10,11 @@ import { CreateCardButtonComponent } from './create-card-button/create-card-butt
 import { CardFormModalComponent } from './card-form-modal/card-form-modal.component';
 
 import { CharacterService } from '../../../services/characters.service';
-import { FactionsService, Faction } from '../../../services/factions.service';
+import { FactionsService } from '../../../services/factions.service';
 import { EventService } from '../../../services/event.service';
+import { Character } from '../../../models/character.model';
+import { Event } from '../../../models/event.model';
+import { Faction } from '../../../models/faction.model';
 
 // import { CharacterCardComponent } from '../characters/character-card/character-card.component';
 // import { WorldCardComponent } from '../worlds/world-card/world-card.component';
@@ -29,9 +32,9 @@ export class MainBoardComponent {
   showModal = false;
   modalType: 'character' | 'faction' | 'event' = 'character';
 
-  characters: any[] = [];
+  characters: Character[] = [];
   factions: Faction[] = [];
-  events: any[] = [];
+  events: Event[] = [];
 
 
   constructor(
@@ -67,22 +70,22 @@ export class MainBoardComponent {
 
     switch(this.modalType){
       case 'character':
-        const createdChar = await this.characterService.addCharacter(data);
-        this.characters = [...this.characters, ...createdChar];
+        const newChar = await this.characterService.addCharacter(data);
+        this.characters.push(newChar);
         break;
 
       case 'faction':
-        const createdFaction = await this.factionService.createFaction(data);
-        this.factions = [...this.factions, createdFaction];
+        const newFaction = await this.factionService.createFaction(data);
+        this.factions.push(newFaction);
         break;
       
       case 'event':
-        const createdEvent = await this.eventService.addEvent(data);
-        this.events = [...this.events, ...createdEvent];
+        const newEvent = await this.eventService.addEvent(data);
+        this.events.push(newEvent);
         break;
    
 
-  }
- this.closeModal()
+    }
+  this.closeModal()
   }
 }

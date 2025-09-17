@@ -1,17 +1,6 @@
 import { Injectable } from "@angular/core"
 import { SupabaseService } from "./supabase.service";
-
-export interface Faction {
-    id?: string;
-    name: string;
-    description?: string;
-    type?: string;
-    emplemUrl?:string;
-    leaders?: string[];
-    associatedCharacters?: string[];
-    created_at?:string;
-
-}
+import { Faction } from "../models/faction.model";
 
 @Injectable({
     providedIn: 'root',
@@ -31,13 +20,14 @@ export class FactionsService{
     }
 
     async getFactionById(id:string): Promise<Faction|null>{
-    const {data, error} = await this.supabase.client
-    .from('factions')
-    .select('*')
-    .eq('id',id)
-    .single();
-    if (error) throw error;
-    return data as Faction|null;
+        const {data, error} = await this.supabase.client
+        .from('factions')
+        .select('*')
+        .eq('id',id)
+        .single();
+
+        if (error) throw error;
+        return data as Faction|null;
     }
 
     async createFaction(faction: Partial<Faction>): Promise<Faction>{
@@ -46,8 +36,9 @@ export class FactionsService{
         .insert(faction)
         .select()
         .single();
-    if(error)throw error;
-    return data as Faction;
+
+        if(error)throw error;
+        return data as Faction;
     }
 
     async updateFaction(id:string, faction:Partial<Faction>): Promise<Faction>{
@@ -61,8 +52,6 @@ export class FactionsService{
         if(error) throw error;
         return data as Faction;
     }
-
-
 
     async deleteFaction(id:string): Promise<void>{
         const {error} = await this.supabase.client
