@@ -1,14 +1,23 @@
-<div *ngIf="loading">Loading Characters...</div>
-<div *ngIf="error">{{error}}</div>
+<!-- <div *ngIf="loading">Loading Characters...</div>
+<div *ngIf="error">{{error}}</div> -->
 
-<div class="characters-grid" *ngIf="!loading && !error">
+<div *ngIf="characters.length === 0"> No characters created yet</div>
 
-<app-character-card
-    *ngFor="let character of characters"
-    [name]="character.full_name"
-    [alias]="character.alias"
-    [avatarUrl]="character.avatar"
-    [role]="character.role"
+<div class="characters-grid">
 
-></app-character-card>
+    <div *ngFor="let character of characters">
+        <app-character-card
+            [name]="character.name"
+            [alias]="character.alias"
+            [avatarUrl]="character.avatar_url"
+            [role]="character.role"
+            [birthdate]="character.birthdate"
+            [personalityMotivation]="character.personality_motivation"
+            [biographyDevelopment]="character.biography_development"
+            [appearance]="character.appearance"
+        ></app-character-card>
+
+        <button (click)="onDelete(character)">Eliminar</button>
+
+    </div>
 </div>

@@ -9,8 +9,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './faction-card.component.css'
 })
 export class FactionCardComponent {
-  @Input() name!: string;
-  @Input() description?: string;
-}
+  @Input() name!: string ;
+  @Input() description?: string = '';
+  @Input() leaders?: string[] = []; 
+  @Input() altNames?: string[] = [];
+  @Input() charactersAssociated?: string[] = [];
+  @Input() symbolUrl?: string = '';
+  @Input() motivation?: string = '';
+  @Input() descriptionCulture?: string = '';
+  @Input() descriptionTerritory?: string = '';
+  @Input() descriptionTechnology?: string = '';
 
+}
 

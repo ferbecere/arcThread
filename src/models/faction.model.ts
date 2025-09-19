@@ -6,7 +6,7 @@ export interface Faction {
     symbol_url?: string;
     description_culture?:string,
     description_territory?:string;
-    description_tecnology?:string;
+    description_technology?:string;
     motivation?:string;
     leaders?:string[];
     characters_associated?:string[];

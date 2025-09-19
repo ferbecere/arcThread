@@ -1,14 +1,18 @@
-<div *ngIf="loading">Loading events</div>
-<div *ngIf="error">{{error}}</div>
-<div class="events-grid" *ngIf="!loading && !error">
+<div *ngIf="events.length === 0">No eventes created yet.</div>
+
+<div class="events-grid">
+
+    <div *ngFor="let e of events">
+
     <app-event-node
-    *ngFor="let event of events"
-    [title] = "event.title"
-    [chapter] = "event.chapter"
-    [year] = "event.year"
-    [relevance] = "event.relevance"
-    [act] = "event.act"
-    >
+        [title] = "e.title"
+        [chapter]="e.chapter"
+        [year]="e.year?.toString()"
+        [act]="e.act"
+        [description]="e.description">
+    
     </app-event-node>
 
+    <button (click)="onDelete(e)">Delete</button>
+    </div>
 </div>

@@ -1,5 +1,6 @@
 <div class="event-node">
     <p class="title">{{title}}</p>
+    <p *ngIf="act">Act:{{act}}</p>
     <p *ngIf="chapter || year">
         {{chapter? 'Cap:' + chapter: ''}}{{year ? 'Year:' + year: ''}} 
         <!-- esta parte deberia mostrarse en otras partes creo. poma -->
@@ -7,4 +8,6 @@
     <!-- <img *ngIf="imageUrl" [src]="imageUrl" alt="{{title}}"/> -->
     <p class="description" *ngIf="description">{{description}}</p>
     <span *ngIf="relevance" class="key-event">Key Event!</span>
+    <span *ngIf="imageUrl">image[><]</span>
 </div>
+

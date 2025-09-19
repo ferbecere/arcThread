@@ -10,7 +10,13 @@ import { CommonModule } from '@angular/common';
 })
 export class CharacterCardComponent {
   @Input() name: string = '';
-  @Input() alias?: string;
-  @Input() avatarUrl?: string;
-  @Input() role?: string;
+  @Input() alias?: string = '';
+  @Input() avatarUrl?: string = '';
+  @Input() role?: string = '';
+  @Input() birthdate?:string = '';
+  @Input() personalityMotivation?: string = '';
+  @Input() biographyDevelopment?: string = '';
+  @Input() appearance?:string = '';
 }
+
+

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -12,49 +12,73 @@ import { CardFormModalComponent } from './card-form-modal/card-form-modal.compon
 import { CharactersService } from '../../../services/characters.service';
 import { FactionsService } from '../../../services/factions.service';
 import { EventService } from '../../../services/event.service';
+
 import { Character } from '../../../models/character.model';
-import { Event } from '../../../models/event.model';
+import { Event as EventModel } from '../../../models/event.model';
 import { Faction } from '../../../models/faction.model';
 
-// import { CharacterCardComponent } from '../characters/character-card/character-card.component';
-// import { WorldCardComponent } from '../worlds/world-card/world-card.component';
-// import { EventNodeComponent } from '../events/event-node/event-node.component';
 
 @Component({
   selector: 'app-main-board',
   standalone:true,
-  imports: [CommonModule,CharacterListComponent,DragDropModule,FactionListComponent,EventListComponent,CreateCardButtonComponent,CardFormModalComponent],
+  imports: [
+    CommonModule,
+    CharacterListComponent,
+    DragDropModule,
+    FactionListComponent,
+    EventListComponent,
+    CreateCardButtonComponent,
+    CardFormModalComponent],
   templateUrl: './main-board.component.html',
   styleUrl: './main-board.component.css'
 })
-export class MainBoardComponent {
+export class MainBoardComponent implements OnInit {
 
   showModal = false;
   modalType: 'character' | 'faction' | 'event' = 'character';
 
+  selectedItem: Character | Faction | EventModel | null = null;
+  showDetailsPanel = false;
+
+
   characters: Character[] = [];
   factions: Faction[] = [];
-  events: Event[] = [];
+  events: EventModel[] = [];
+
+    loading = false;
+    error: string | null = null;
 
   constructor(
     private charactersService: CharactersService,
     private factionsService: FactionsService,
     private eventService: EventService
-
   ){}
 
-  ngOnInit(){
-    this.loadAll();
+   async ngOnInit() {
+    await this.loadAll();
   }
 
-  async loadAll(){
-    this.characters = await this.charactersService.getCharacters();
-    this.factions = await this.factionsService.getFactions();
-    this.events = await this.eventService.getEvents();
-    
+  private async loadAll(): Promise<void>{
+
+    this.loading=true;
+    this.error= null;
+
+  try {
+        [this.characters, this.factions, this.events] = await Promise.all([
+        this.charactersService.getCharacters(),
+        this.factionsService.getFactions(),
+        this.eventService.getEvents()
+      ]);
+      } catch (err:any) {
+        console.error('Error loading data', err);
+      }finally {
+        this.loading = false;
+      }
   }
 
-  openModal(type: 'character' | 'faction' | 'event'){
+  //creation modal. 
+
+  openModal(type: 'character' | 'faction' | 'event'):void{
     this.modalType = type;
     this.showModal = true;
   };
@@ -63,17 +87,21 @@ export class MainBoardComponent {
     this.showModal = false;
   }
 
-  async handleCreate(data: Character | Faction | Event){
 
+
+  //Handlers 1- crear.
+
+  async handleCreate(data: Character | Faction | EventModel){
+    try{
     switch(this.modalType){
       case 'character':
-        const newChar = await this.charactersService.addCharacter(data);
-        this.characters.push(newChar);
+        const newChar = await this.charactersService.addCharacter(data as Character);
+        this.characters = [...this.characters, newChar];
         break;
 
       case 'faction':
-        const factionData = {...data} as Faction & {
-          alt_names?: string | string[];
+        const factionData = {...(data as Faction)} as Faction &
+         { alt_names?: string | string[];
           leaders?: string | string[];
           characters_associated?: string | string[];
         };
@@ -89,16 +117,68 @@ export class MainBoardComponent {
         }
 
         const newFaction = await this.factionsService.createFaction(factionData);
-        this.factions.push(newFaction);
+        this.factions = [...this.factions, newFaction];
         break;
       
       case 'event':
-        const newEvent = await this.eventService.addEvent(data);
-        this.events.push(newEvent);
+        const newEvent = await this.eventService.addEvent(data as EventModel);
+        this.events = [...this.events, newEvent];
         break;
    
-
-    }
+      }
+    } catch (err: any){
+      console.error('error creting Item',err);
+      alert(err?.message || 'error Creating Item');
+    }finally{
   this.closeModal()
+      
+    }
+
   }
+
+ //2- delete by ID.
+
+  async handleDeleteCharacter(character:Character):Promise<void>{
+    try{
+    await this.charactersService.deleteCharacter(character.id!);
+    this.characters = this.characters.filter(c => c.id !== character.id);
+    }catch(err){
+      console.error('Error deleting character',err);
+      alert('Failed to delete character');
+    }
+  }
+
+  async handleDeleteFaction(faction:Faction):Promise<void>{
+    try{
+    await this.factionsService.deleteFaction(faction.id!);
+    this.factions = this.factions.filter(f => f.id !== faction.id);
+  }catch(err){
+      console.error('Error deleting faction',err);
+      alert('Failed to delete faction');
+    }
+  }
+
+  async handleDeleteEvent(event:EventModel){
+    try{
+    await this.eventService.deleteEvent(event.id!);
+    this.events = this.events.filter(e => e.id !== event.id);
+  }catch(err){
+      console.error('Error deleting event',err);
+      alert('Failed to delete event');
+    }
+  }
+
+
+  //edits and details by object. will be shown at rigth column.
+
+    openDetails(item: Character | Faction | EventModel) {
+    this.selectedItem = item;
+    this.showDetailsPanel = true;
+  }
+
+  closeDetails() {
+    this.selectedItem = null;
+    this.showDetailsPanel = false;
+  }
+
 }

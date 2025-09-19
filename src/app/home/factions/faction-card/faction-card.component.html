@@ -1,4 +1,18 @@
 <div class="faction-card">
-    <h3>{{name}}</h3>
-    <p *ngIf="description">{{description}}</p>
+  <img *ngIf="symbolUrl"/>
+
+  <h3>{{ name }}</h3>
+
+  <p *ngIf="altNames?.length">Alt Names: {{ altNames?.join(', ') }}</p>
+
+  <p *ngIf="descriptionCulture">Culture: {{ descriptionCulture }}</p>
+  <p *ngIf="descriptionTerritory">Territory: {{ descriptionTerritory }}</p>
+  <p *ngIf="descriptionTechnology">Technology: {{ descriptionTechnology }}</p>
+
+  <p *ngIf="motivation">Motivation: {{ motivation }}</p>
+
+  <p *ngIf="leaders?.length">Leaders: {{ leaders?.join(', ') }}</p>
+  <p *ngIf="charactersAssociated?.length">Characters Associated: {{ charactersAssociated?.join(', ') }}</p>
+
+
 </div>

@@ -3,9 +3,15 @@
     <!-- <p>Aquí apareceran las tarjetas de personajes mundos y eventos.</p> -->
 
 
-<app-character-list></app-character-list>
-<app-faction-list></app-faction-list>
-<app-event-list></app-event-list> 
+<app-character-list
+ [characters]="characters"
+ (deleteCharacter)="handleDeleteCharacter($event)"></app-character-list>
+<app-faction-list 
+ [factions]="factions"
+ (deleteFaction)="handleDeleteFaction($event)"></app-faction-list>
+<app-event-list
+ [events]="events"
+ (deleteEvent)="handleDeleteEvent($event)"></app-event-list> 
 
 <app-create-card-button (create)="openModal($event)"></app-create-card-button>
 

@@ -1,18 +1,25 @@
-<div *ngIf="loading"> Loading Factions...</div>
-<div *ngIf="error">{{error}}</div>
+<!-- <div *ngIf="loading"> Loading Factions...</div>
+<div *ngIf="error">{{error}}</div> -->
 
 
-<div class="factions-grid" *ngIf="!loading && !error">
-    <div *ngFor="let faction of factions">
-        <app-faction-card
-            [name]="faction.name"
-            [description]="faction.description">
-        </app-faction-card>
+<div *ngIf="factions.length === 0"> No hay facciones aún </div>
+   
+<div class="factions-grid">
+    <div *ngFor="let f of factions">
+            <app-faction-card
+                [name]="f.name"
+                [altNames]="f.alt_names"
+                [symbolUrl]="f.symbol_url"
+                [descriptionCulture]="f.description_culture"
+                [descriptionTerritory]="f.description_territory"
+                [descriptionTechnology]="f.description_technology"
+                [motivation]="f.description_territory"
+                [leaders]="f.leaders">
+            </app-faction-card>
 
 
-        <button (click)="deleteFaction(faction.id)">Delete</button>
-        <!-- faltarán las demás opciones de crud, poma  -->
-
+            <button (click)="onDelete(f)">Delete</button>
+            <!-- faltarán las demás opciones de crud, poma  -->
+    
     </div>
-
 </div>
