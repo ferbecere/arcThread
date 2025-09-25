@@ -19,6 +19,20 @@ import { Faction } from '../../../models/faction.model';
 
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 
+interface Position{
+  x:number;
+  y:number;
+}
+
+interface Card {
+  id?:string;
+  type: 'character' | 'faction' | 'event';
+  position?:Position;
+  width?:number;
+  height?:number;
+  colliding?: boolean;
+}
+
 
 @Component({
   selector: 'app-main-board',
@@ -34,6 +48,8 @@ import { CdkDragEnd } from '@angular/cdk/drag-drop';
   templateUrl: './main-board.component.html',
   styleUrl: './main-board.component.css'
 })
+
+
 export class MainBoardComponent implements OnInit {
 
   showModal = false;
@@ -120,9 +136,46 @@ export class MainBoardComponent implements OnInit {
     case 'event':
       this.eventService.updateEvent(event.item.id!, { position: event.item.position });
       break;
-      
+     }
+     this.checkCollisions(); //[...this.characters, ...this.factions, ...this.events]
+
+}
+
+checkCollisions():void{
+  const allCards: Card[] = [
+    ...this.characters,
+    ...this.factions,
+    ...this.events
+  ];
+
+  allCards.forEach(c=>(c.colliding = false));
+  for(let i= 0; i<allCards.length;i++){
+    for(let j= i+1; j<allCards.length;j++){
+      if(this.isColliding(allCards[i],allCards[j])){
+        allCards[i].colliding= true;
+        allCards[i].colliding=true;
+      }
+    }
   }
 }
+
+private isColliding(a:Card, b:Card):boolean{
+
+  if(!a.position || !b.position) return false; // if theres no position there's no colliding.
+
+  const widthA = a.width?? 120;
+  const heightA = a.height ?? 160;
+  const widthB = b.width ?? 120;
+  const heightB = b.height ?? 160;
+
+  return !(
+    a.position.x + widthA < b.position.x ||
+    a.position.x > b.position.x + widthB ||
+    a.position.y + heightA < b.position.y ||
+    a.position.y > b.position.y + heightB);
+  
+}
+
 
   //creation modal. 
 

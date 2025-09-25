@@ -1,3 +1,8 @@
+/* :host{
+    position:absolute;
+    display: inline-block;
+} */
+
 .character-card{
     border:1px solid #ccc;
     border-radius:8px;
@@ -15,4 +20,8 @@
     border-radius:50%;
     object-fit:cover;
 
+}
+
+.colliding{
+    border: 2px solid red;
 }

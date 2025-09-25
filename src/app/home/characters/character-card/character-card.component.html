@@ -3,6 +3,7 @@
  cdkDrag
  [style.left.px]="item.position?.x"
  [style.top.px]="item.position?.y"
+ [class.colliding]="item.colliding"
  (cdkDragEnded)="onDragEnd($event)">
 
     <img *ngIf="item.avatar_url" [src]=" item.avatar_url" alt="{{item.name}}" class="avatar"/>

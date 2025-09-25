@@ -11,4 +11,5 @@ export interface Event {
     created_at?: string;
 
     position?: {x:number; y: number}; //integarte in supabase
+    colliding?: boolean;
 }

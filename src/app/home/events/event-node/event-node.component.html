@@ -3,6 +3,7 @@ class="event-node"
  cdkDrag
  [style.left.px]="item.position?.x"
  [style.top.px]="item.position?.y"
+ [class.colliding]="item.colliding"
  (cdkDragEnded)="onDragEnd($event)">
 
     <p class="title">{{item.title}}</p>

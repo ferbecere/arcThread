@@ -6,3 +6,7 @@
     width:180px;
     background-color: #e3f2fd;
 }
+
+.colliding{
+    border: 2px solid red;
+}

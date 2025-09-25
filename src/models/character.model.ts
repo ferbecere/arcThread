@@ -13,4 +13,5 @@ export interface Character {
     created_at?: string;
 
     position?: {x:number; y: number}; //integrar con supabase!
+    colliding?: boolean;
 }

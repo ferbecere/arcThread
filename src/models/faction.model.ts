@@ -15,4 +15,5 @@ export interface Faction {
     created_at?:string;
 
     position?: {x:number; y: number}; //to integrate in supabase
+    colliding?: boolean;
 }
