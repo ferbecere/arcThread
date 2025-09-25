@@ -16,9 +16,14 @@ export class FactionListComponent {
 
   @Input() factions: Faction[]=[];
   @Output() deleteFaction = new EventEmitter<Faction>();
+  @Output() dragEnd = new EventEmitter<{x:number, y:number, item:Faction}>();
 
   onDelete(f:Faction){
     this.deleteFaction.emit(f);
+  }
+
+  onDragEnd(event:{x:number, y:number, item:Faction}){
+    this.dragEnd.emit(event);
   }
 
 }

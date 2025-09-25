@@ -1,49 +1,48 @@
 import { Injectable } from "@angular/core";
-import { SupabaseService } from "./supabase.service";
-import { Event } from "../models/event.model";
+import { Event as EventModel } from "../models/event.model";
+import { supabase} from "../app/supabaseClient"
 
 @Injectable({
     providedIn:'root'
 })
 
 export class EventService{
-    constructor(private supabaseService : SupabaseService){}
 
-    async getEvents(): Promise<Event[]>{
-        const {data, error} = await this.supabaseService.client
+    async getEvents(): Promise<EventModel[]>{
+        const {data, error} = await supabase
         .from('events')
         .select('*');
 
         if(error) throw error;
-        return data as Event[];
+        return data as EventModel[];
     }
 
-    async getEventById(id:string): Promise<Event | null>{
-        const {data,error}=await this.supabaseService.client
+    async getEventById(id:string): Promise<EventModel | null>{
+        const {data,error}=await supabase
         .from('events')
         .select('*')
         .eq('id',id)
         .single();
 
         if(error) throw error;
-        return data as Event | null;
+        return data as EventModel | null;
 
     }
 
-    async addEvent(event: Partial<Event>): Promise<Event>{
-        const {data,error} = await this.supabaseService.client
+    async addEvent(event: Partial<EventModel>): Promise<EventModel>{
+        const {data,error} = await supabase
         .from('events')
         .insert( [event])
         .select()
         .single();
 
         if(error) throw error;
-        return data as Event;
+        return data as EventModel;
 
     }
 
-    async updateEvent(id:string, updates:Partial<Event>): Promise<Event>{
-        const {data,error} = await this.supabaseService.client
+    async updateEvent(id:string, updates:Partial<EventModel>): Promise<EventModel>{
+        const {data,error} = await supabase
         .from('events')
         .update(updates)
         .eq('id',id)
@@ -51,12 +50,12 @@ export class EventService{
         .single();
 
         if(error) throw error;
-        return data as Event;
+        return data as EventModel;
 
     }
 
     async deleteEvent(id:string): Promise<void>{
-        const {error} = await this.supabaseService.client
+        const {error} = await supabase
         .from('events')
         .delete()
         .eq('id',id)

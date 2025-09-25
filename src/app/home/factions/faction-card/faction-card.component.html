@@ -1,18 +1,24 @@
-<div class="faction-card">
-  <img *ngIf="symbolUrl"/>
+<div class="faction-card"
+ cdkDrag
+ [style.left.px]="item.position?.x"
+ [style.top.px]="item.position?.y"
+ (cdkDragEnded)="onDragEnd($event)"
+>
+  
+  <img *ngIf="item.symbol_url"/>
 
-  <h3>{{ name }}</h3>
+  <h3>{{ item.name }}</h3>
 
-  <p *ngIf="altNames?.length">Alt Names: {{ altNames?.join(', ') }}</p>
+  <p *ngIf="item.alt_names?.length">Alt Names: {{ item.alt_names?.join(', ') }}</p>
 
-  <p *ngIf="descriptionCulture">Culture: {{ descriptionCulture }}</p>
-  <p *ngIf="descriptionTerritory">Territory: {{ descriptionTerritory }}</p>
-  <p *ngIf="descriptionTechnology">Technology: {{ descriptionTechnology }}</p>
+  <p *ngIf="item.description_culture">Culture: {{ item.description_culture }}</p>
+  <p *ngIf="item.description_territory">Territory: {{ item.description_territory }}</p>
+  <p *ngIf="item.description_technology">Technology: {{ item.description_technology }}</p>
 
-  <p *ngIf="motivation">Motivation: {{ motivation }}</p>
+  <p *ngIf="item.motivation">Motivation: {{ item.motivation }}</p>
 
-  <p *ngIf="leaders?.length">Leaders: {{ leaders?.join(', ') }}</p>
-  <p *ngIf="charactersAssociated?.length">Characters Associated: {{ charactersAssociated?.join(', ') }}</p>
+  <p *ngIf="item.leaders?.length">Leaders: {{ item.leaders?.join(', ') }}</p>
+  <p *ngIf="item.characters_associated?.length">Characters Associated: {{ item.characters_associated?.join(', ') }}</p>
 
 
 </div>

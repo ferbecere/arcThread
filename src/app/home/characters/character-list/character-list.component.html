@@ -7,14 +7,9 @@
 
     <div *ngFor="let character of characters">
         <app-character-card
-            [name]="character.name"
-            [alias]="character.alias"
-            [avatarUrl]="character.avatar_url"
-            [role]="character.role"
-            [birthdate]="character.birthdate"
-            [personalityMotivation]="character.personality_motivation"
-            [biographyDevelopment]="character.biography_development"
-            [appearance]="character.appearance"
+            [item]="character"
+            (dragEnd)="onDragEnd($event)"
+
         ></app-character-card>
 
         <button (click)="onDelete(character)">Eliminar</button>

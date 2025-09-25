@@ -1,13 +1,19 @@
-<div class="event-node">
-    <p class="title">{{title}}</p>
-    <p *ngIf="act">Act:{{act}}</p>
-    <p *ngIf="chapter || year">
-        {{chapter? 'Cap:' + chapter: ''}}{{year ? 'Year:' + year: ''}} 
+<div 
+class="event-node"
+ cdkDrag
+ [style.left.px]="item.position?.x"
+ [style.top.px]="item.position?.y"
+ (cdkDragEnded)="onDragEnd($event)">
+
+    <p class="title">{{item.title}}</p>
+    <p *ngIf="item.act">Act:{{item.act}}</p>
+    <p *ngIf="item.chapter || item.year">
+        {{item.chapter? 'Cap:' + item.chapter: ''}}{{item.year ? 'Year:' + item.year: ''}} 
         <!-- esta parte deberia mostrarse en otras partes creo. poma -->
     </p>
     <!-- <img *ngIf="imageUrl" [src]="imageUrl" alt="{{title}}"/> -->
-    <p class="description" *ngIf="description">{{description}}</p>
-    <span *ngIf="relevance" class="key-event">Key Event!</span>
-    <span *ngIf="imageUrl">image[><]</span>
+    <p class="description" *ngIf="item.description">{{item.description}}</p>
+    <span *ngIf="item.key_event" class="key-event">Key Event!</span>
+    
 </div>
 

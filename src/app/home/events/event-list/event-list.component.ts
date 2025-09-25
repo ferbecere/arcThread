@@ -14,9 +14,14 @@ import { Event as EventModel } from '../../../../models/event.model';
 export class EventListComponent{
   @Input() events: EventModel[] = [];
   @Output() deleteEvent = new EventEmitter<EventModel>();
+  @Output() dragEnd = new EventEmitter<any>();
 
   onDelete(event:EventModel){
     this.deleteEvent.emit(event);
+  }
+
+  onDragEnd(event:{x:number, y:number,item:EventModel}){
+    this.dragEnd.emit(event);
   }
 
 }

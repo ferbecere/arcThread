@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
-import { SupabaseService } from "./supabase.service";
 import { Faction } from "../models/faction.model";
+import {supabase} from "../app/supabaseClient";
 
 @Injectable({
     providedIn: 'root',
@@ -8,10 +8,9 @@ import { Faction } from "../models/faction.model";
 })
 
 export class FactionsService{
-    constructor(private supabase: SupabaseService){}
 
     async getFactions(): Promise<Faction[]>{
-        const {data, error} = await this.supabase.client
+        const {data, error} = await supabase
         .from('factions')
         .select('*');
 
@@ -20,7 +19,7 @@ export class FactionsService{
     }
 
     async getFactionById(id:string): Promise<Faction|null>{
-        const {data, error} = await this.supabase.client
+        const {data, error} = await supabase
         .from('factions')
         .select('*')
         .eq('id',id)
@@ -31,7 +30,7 @@ export class FactionsService{
     }
 
     async createFaction(faction: Partial<Faction>): Promise<Faction>{
-        const {data, error} = await this.supabase.client
+        const {data, error} = await supabase
         .from('factions')
         .insert(faction)
         .select()
@@ -42,7 +41,7 @@ export class FactionsService{
     }
 
     async updateFaction(id:string, faction:Partial<Faction>): Promise<Faction>{
-        const {data,error} = await this.supabase.client
+        const {data,error} = await supabase
         .from('factions')
         .update(faction)
         .eq('id',id)
@@ -54,7 +53,7 @@ export class FactionsService{
     }
 
     async deleteFaction(id:string): Promise<void>{
-        const {error} = await this.supabase.client
+        const {error} = await supabase
         .from('factions')
         .delete()
         .eq('id',id);

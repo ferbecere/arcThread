@@ -1,4 +1,6 @@
 export interface Faction {
+    type:'faction';
+
     id?: string;
     name: string;
     alt_names?: string[];
@@ -11,4 +13,6 @@ export interface Faction {
     leaders?:string[];
     characters_associated?:string[];
     created_at?:string;
+
+    position?: {x:number; y: number}; //to integrate in supabase
 }

@@ -7,19 +7,11 @@
 <div class="factions-grid">
     <div *ngFor="let f of factions">
             <app-faction-card
-                [name]="f.name"
-                [altNames]="f.alt_names"
-                [symbolUrl]="f.symbol_url"
-                [descriptionCulture]="f.description_culture"
-                [descriptionTerritory]="f.description_territory"
-                [descriptionTechnology]="f.description_technology"
-                [motivation]="f.description_territory"
-                [leaders]="f.leaders">
+                [item]="f"
+                (dragEnd)="onDragEnd($event)">
             </app-faction-card>
 
-
             <button (click)="onDelete(f)">Delete</button>
-            <!-- faltarán las demás opciones de crud, poma  -->
     
     </div>
 </div>

@@ -14,9 +14,14 @@ import { Character } from '../../../../models/character.model';
 export class CharacterListComponent {
   @Input() characters: Character[] = [];
   @Output() deleteCharacter = new EventEmitter<Character>();
+  @Output() dragEnd = new EventEmitter<{x:number, y:number, item:Character}>();
 
   onDelete(character: Character){
     this.deleteCharacter.emit(character);
+  }
+
+  onDragEnd(event: {x:number, y:number, item:Character}){
+    this.dragEnd.emit(event);
   }
 
 }

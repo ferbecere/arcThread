@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule, CdkDragMove} from '@angular/cdk/drag-drop';
 
 import { CharacterListComponent } from '../characters/character-list/character-list.component';
 import { EventListComponent } from '../events/event-list/event-list.component';
@@ -16,6 +16,8 @@ import { EventService } from '../../../services/event.service';
 import { Character } from '../../../models/character.model';
 import { Event as EventModel } from '../../../models/event.model';
 import { Faction } from '../../../models/faction.model';
+
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -58,6 +60,8 @@ export class MainBoardComponent implements OnInit {
     await this.loadAll();
   }
 
+
+  //charge previously created cards.
   private async loadAll(): Promise<void>{
 
     this.loading=true;
@@ -69,12 +73,56 @@ export class MainBoardComponent implements OnInit {
         this.factionsService.getFactions(),
         this.eventService.getEvents()
       ]);
+
+        //preset position 
+
+        this.characters = this.characters.map((c,i)=>({
+          ...c,
+
+          position: c.position ?? {x:50 + i * 120, y: 50}
+        }));
+
+        this.factions = this.factions.map((f,i)=>({
+          ...f,
+
+          position:f.position??{ x:100 + i * 150, y: 200}
+        }));
+
+
+        this.events = this.events.map((e,i)=>({
+          ...e,
+
+          position: e.position ?? {x: 200 + i * 100, y: 400}
+        }))
+
+
+
       } catch (err:any) {
         console.error('Error loading data', err);
       }finally {
         this.loading = false;
       }
   }
+
+
+  // drag and drop implementation.
+
+  onDragEnd(event: { x: number; y: number; item: any }) {
+  event.item.position = { x: event.x, y: event.y };
+
+  switch (event.item.type) {
+    case 'character':
+      this.charactersService.updateCharacter(event.item.id!, { position: event.item.position });
+      break;
+    case 'faction':
+      this.factionsService.updateFaction(event.item.id!, { position: event.item.position });
+      break;
+    case 'event':
+      this.eventService.updateEvent(event.item.id!, { position: event.item.position });
+      break;
+      
+  }
+}
 
   //creation modal. 
 

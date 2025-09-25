@@ -1,21 +1,25 @@
-import { Component,Input } from '@angular/core';
+import { Component,EventEmitter,Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Event as EventModel } from '../../../../models/event.model';
+import { CdkDrag, CdkDragEnd } from '@angular/cdk/drag-drop';
 
 
 @Component({
   selector: 'app-event-node',
   standalone:true,
-  imports: [CommonModule],
+  imports: [CommonModule, CdkDrag],
   templateUrl: './event-node.component.html',
   styleUrl: './event-node.component.css'
 })
 export class EventNodeComponent {
-  @Input() title!: string ;
-  @Input() chapter?: string = '';
-  @Input() year?: string = '';
-  @Input() description?: string = '';
-  @Input() relevance?: boolean ;
-  @Input() imageUrl?: string = '';
-  @Input() act?: string = '';
+  @Input() item!: EventModel;
+
+  @Output() dragEnd = new EventEmitter<{x:number, y:number, item:EventModel}>();
+
+  onDragEnd(event:CdkDragEnd){
+    const pos = event.source.getFreeDragPosition();
+    this.dragEnd.emit({x:pos.x, y:pos.y, item: this.item});
+  }
+
 }
 

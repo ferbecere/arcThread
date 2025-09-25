@@ -1,4 +1,6 @@
 export interface Character {
+    type:'character';
+
     id?:string;
     name: string;
     alias?:string;
@@ -9,4 +11,6 @@ export interface Character {
     biography_development?: string;
     appearance?: string;
     created_at?: string;
+
+    position?: {x:number; y: number}; //integrar con supabase!
 }

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { SupabaseService } from "./supabase.service";
 import { Character } from "../models/character.model";
+import { supabase } from "../app/supabaseClient"
 
 
 @Injectable({
@@ -8,19 +9,16 @@ import { Character } from "../models/character.model";
 })
 
 export class CharactersService{
-    constructor(private supabaseService: SupabaseService){}
     
     async getCharacters():Promise<Character[]>{
-        const {data, error} = await this.supabaseService.client
-        .from('characters')
-        .select('*');
+        const {data, error} = await supabase.from('characters').select('*'); 
 
         if(error) throw error;
         return data as Character[];
     }
 
     async getCharacterById(id: string): Promise<Character | null> {
-        const { data, error } = await this.supabaseService.client
+        const { data, error } = await supabase
         .from('characters')
         .select('*')
         .eq('id', id)
@@ -32,7 +30,7 @@ export class CharactersService{
 
 
     async addCharacter(character:Partial<Character>):Promise<Character>{
-        const{data, error}= await this.supabaseService.client
+        const{data, error}= await supabase
         .from('characters')
         .insert([character])
         .select()
@@ -43,7 +41,7 @@ export class CharactersService{
     }
 
     async updateCharacter(id:string, updates:Partial<Character>): Promise<Character>{
-        const {data, error} = await this.supabaseService.client
+        const {data, error} = await supabase
         .from('characters')
         .update(updates)
         .eq('id',id)
@@ -56,7 +54,7 @@ export class CharactersService{
     }
 
     async deleteCharacter(id:string): Promise<void>{
-        const {error} = await this.supabaseService.client
+        const {error} = await supabase
         .from('characters')
         .delete()
         .eq('id',id);
