@@ -1,0 +1,147 @@
+.workspace-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.workspace-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 100;
+}
+
+.btn-back {
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  background: #e5e7eb;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  flex: 1;
+}
+
+.workspace-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.workspace-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr 300px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.left-sidebar {
+  background: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto;
+}
+
+.main-area {
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+
+.right-sidebar {
+  background: #f9fafb;
+  border-left: 1px solid #e5e7eb;
+  overflow-y: auto;
+}
+
+.time-thread-container {
+  height: 100px;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Loading & Error */
+.workspace-loading,
+.workspace-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f4f6;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.workspace-error h2 {
+  color: #ef4444;
+  margin-bottom: 0.5rem;
+}
+
+.workspace-error p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .workspace-layout {
+    grid-template-columns: 200px 1fr 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .workspace-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .left-sidebar,
+  .right-sidebar {
+    display: none;
+  }

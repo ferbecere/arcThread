@@ -1,0 +1,104 @@
+<div class="projects-container">
+  <div class="projects-header">
+    <h1>Your Stories</h1>
+    <button class="btn-create" (click)="openCreateModal()">
+      <span class="icon">+</span>
+      New Project
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading projects...</p>
+  </div>
+
+  <div *ngIf="error && !loading" class="error">
+    <p>{{ error }}</p>
+    <button (click)="loadProjects()">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && !error" class="projects-grid">
+    <div *ngIf="projects.length === 0" class="empty-state">
+      <h2>No projects yet</h2>
+      <p>Create your first story project to get started</p>
+      <button class="btn-primary" (click)="openCreateModal()">Create Project</button>
+    </div>
+
+    <div 
+      *ngFor="let project of projects" 
+      class="project-card"
+      (click)="openProject(project.id)"
+    >
+      <div class="project-card-header">
+        <h3>{{ project.title }}</h3>
+        <button 
+          class="btn-delete" 
+          (click)="deleteProject(project, $event)"
+          title="Delete project"
+        >
+          ×
+        </button>
+      </div>
+      
+      <p class="project-description" *ngIf="project.description">
+        {{ project.description }}
+      </p>
+      
+      <div class="project-meta">
+        <span class="meta-item">
+          Created: {{ formatDate(project.created_at) }}
+        </span>
+        <span class="meta-item" *ngIf="project.updated_at !== project.created_at">
+          Updated: {{ formatDate(project.updated_at) }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para crear proyecto -->
+<div *ngIf="showCreateModal" class="modal-overlay" (click)="closeCreateModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Create New Project</h2>
+      <button class="btn-close" (click)="closeCreateModal()">×</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="projectTitle">Project Title *</label>
+        <input 
+          id="projectTitle"
+          type="text" 
+          [(ngModel)]="newProjectTitle"
+          placeholder="My Epic Fantasy Novel"
+          maxlength="100"
+          required
+        />
+      </div>
+      
+      <div class="form-group">
+        <label for="projectDescription">Description</label>
+        <textarea 
+          id="projectDescription"
+          [(ngModel)]="newProjectDescription"
+          placeholder="A brief description of your story..."
+          rows="4"
+          maxlength="500"
+        ></textarea>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeCreateModal()">Cancel</button>
+      <button 
+        class="btn-primary" 
+        (click)="createProject()"
+        [disabled]="!newProjectTitle.trim() || loading"
+      >
+        {{ loading ? 'Creating...' : 'Create Project' }}
+      </button>
+    </div>
+  </div>
+</div>
+*/

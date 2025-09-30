@@ -37,7 +37,7 @@ export class HeaderComponent {
     try{
       const user = await this.supabase.signIn(this.email,this.password);
       alert("User loged");
-      this.router.navigate(['home']);
+      this.router.navigate(['/projects']);
     }catch (error:any){
       console.error(error.message);
       alert(error.message);

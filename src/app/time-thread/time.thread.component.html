@@ -1,0 +1,135 @@
+<div class="time-thread">
+  <!-- Controles de navegación -->
+  <div class="navigation-controls">
+    <button 
+      class="nav-btn" 
+      (click)="goToPreviousKnot()"
+      [disabled]="!canGoPrevious()"
+      title="Previous knot"
+    >
+      ◀
+    </button>
+    
+    <span class="current-knot-indicator" *ngIf="currentKnot">
+      {{ currentKnot.title }}
+    </span>
+    
+    <button 
+      class="nav-btn" 
+      (click)="goToNextKnot()"
+      [disabled]="!canGoNext()"
+      title="Next knot"
+    >
+      ▶
+    </button>
+  </div>
+
+  <!-- Timeline de knots -->
+  <div class="knots-timeline">
+    <div 
+      *ngFor="let knot of knots"
+      class="knot-item"
+      [class.active]="currentKnot?.id === knot.id"
+      [class.key-knot]="isKeyKnot(knot)"
+      (click)="selectKnot(knot)"
+    >
+      <div class="knot-marker"></div>
+      <div class="knot-info">
+        <span class="knot-title">{{ knot.title }}</span>
+        <span class="knot-date">{{ formatDate(knot.date) }}</span>
+        <span class="knot-chapter" *ngIf="knot.chapter">{{ knot.chapter }}</span>
+      </div>
+      <button 
+        class="knot-delete-btn"
+        (click)="deleteKnot(knot, $event)"
+        title="Delete knot"
+      >
+        ×
+      </button>
+    </div>
+  </div>
+
+  <!-- Botón crear knot -->
+  <button class="btn-create-knot" (click)="openCreateModal()" title="Create new knot">
+    + New Knot
+  </button>
+</div>
+
+<!-- Modal crear knot -->
+<div *ngIf="showCreateModal" class="modal-overlay" (click)="closeCreateModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Create New Knot</h2>
+      <button class="btn-close" (click)="closeCreateModal()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="knotTitle">Title *</label>
+        <input 
+          id="knotTitle"
+          type="text"
+          [(ngModel)]="newKnotTitle"
+          placeholder="Beginning of the journey"
+          required
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="knotDate">Date *</label>
+          <input 
+            id="knotDate"
+            type="date"
+            [(ngModel)]="newKnotDate"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="knotChapter">Chapter</label>
+          <input 
+            id="knotChapter"
+            type="text"
+            [(ngModel)]="newKnotChapter"
+            placeholder="Chapter 1"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="knotNotes">Notes</label>
+        <textarea 
+          id="knotNotes"
+          [(ngModel)]="newKnotNotes"
+          placeholder="Internal notes about this moment in the story..."
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="form-group checkbox-group" *ngIf="knots.length > 0">
+        <label>
+          <input 
+            type="checkbox"
+            [(ngModel)]="copyFromPrevious"
+          />
+          Copy all characters and factions from current knot
+        </label>
+        <small class="help-text">
+          This will duplicate all existing snapshots to the new knot so you can continue from where you left off.
+        </small>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeCreateModal()">Cancel</button>
+      <button 
+        class="btn-primary" 
+        (click)="createKnot()"
+        [disabled]="!newKnotTitle.trim() || !newKnotDate || loading"
+      >
+        {{ loading ? 'Creating...' : 'Create Knot' }}
+      </button>
+    </div>
+  </div>
+</div>

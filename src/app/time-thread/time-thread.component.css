@@ -1,0 +1,377 @@
+.time-thread {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  height: 100%;
+  background: white;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Controles de navegación */
+.navigation-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.nav-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+  transform: scale(1.05);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.current-knot-indicator {
+  font-weight: 600;
+  color: #374151;
+  min-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Timeline */
+.knots-timeline {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.knot-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0.5rem;
+  border-radius: 8px;
+  min-width: 100px;
+}
+
+.knot-item:hover {
+  background: #f9fafb;
+}
+
+.knot-item.active {
+  background: #ede9fe;
+}
+
+/* Marcador del knot */
+.knot-marker {
+  width: 12px;
+  height: 12px;
+  background: #9ca3af;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px #9ca3af;
+  transition: all 0.2s;
+}
+
+.knot-item.active .knot-marker {
+  width: 16px;
+  height: 16px;
+  background: #6366f1;
+  box-shadow: 0 0 0 3px #6366f1;
+}
+
+.knot-item.key-knot .knot-marker {
+  width: 18px;
+  height: 18px;
+  background: #f59e0b;
+  box-shadow: 0 0 0 3px #f59e0b, 0 0 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Info del knot */
+.knot-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-align: center;
+}
+
+.knot-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.knot-date {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.knot-chapter {
+  font-size: 0.7rem;
+  color: #6366f1;
+  font-weight: 500;
+}
+
+/* Botón delete */
+.knot-delete-btn {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  background: #ef4444;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.knot-item:hover .knot-delete-btn {
+  display: flex;
+}
+
+.knot-delete-btn:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+/* Botón crear knot */
+.btn-create-knot {
+  flex-shrink: 0;
+  padding: 0.75rem 1.25rem;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-create-knot:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #9ca3af;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.btn-close:hover {
+  background: #f3f4f6;
+  color: #1a1a1a;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.checkbox-group {
+  background: #f9fafb;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+  cursor: pointer;
+}
+
+.help-text {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background: #6366f1;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #4f46e5;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+/* Scrollbar personalizada */
+.time-thread::-webkit-scrollbar {
+  height: 6px;
+}
+
+.time-thread::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.time-thread::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.time-thread::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}

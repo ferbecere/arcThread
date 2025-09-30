@@ -1,15 +1,22 @@
-export interface Event {
-    type:'event';
+import { CanvasEntity, Position } from './canvas-entity.model';
 
-    id?: string;
-    title: string;
-    chapter?: string;
-    year?: number;
-    act?: string;
-    key_event?: boolean;
-    description?: string;
-    created_at?: string;
+export interface Event extends CanvasEntity {
+  type: 'event';
+  id: string;
+  knot_id: string;
+  title: string;
+  description?: string;
+  key_event: boolean;
+  is_persistent: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
 
-    position?: {x:number; y: number}; //integarte in supabase
-    colliding?: boolean;
+export interface CreateEventDto {
+  knot_id: string;
+  title: string;
+  description?: string;
+  key_event?: boolean;
+  is_persistent?: boolean;
+  position?: Position;
 }

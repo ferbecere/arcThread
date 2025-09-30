@@ -1,0 +1,56 @@
+<div class="workspace-container" *ngIf="!loading && !error">
+  <!-- Header del workspace -->
+  <div class="workspace-header">
+    <button class="btn-back" (click)="goBackToProjects()">
+      ← Back to Projects
+    </button>
+    <h1 class="project-title">{{ project?.title }}</h1>
+    <div class="workspace-actions">
+      <!-- Aquí puedes añadir acciones como Settings, Share, etc. -->
+    </div>
+  </div>
+
+  <!-- Layout principal -->
+  <div class="workspace-layout">
+    <!-- Sidebar izquierdo (filtros) -->
+    <aside class="left-sidebar">
+      <app-left-sidebar></app-left-sidebar>
+    </aside>
+
+    <!-- Área principal (canvas) -->
+    <main class="main-area">
+      <app-main-board></app-main-board>
+    </main>
+
+    <!-- Sidebar derecho (detalles) -->
+    <aside class="right-sidebar">
+      <app-right-sidebar></app-right-sidebar>
+    </aside>
+  </div>
+
+  <!-- Barra inferior (timeline) -->
+  <div class="time-thread-container">
+    <app-time-thread
+      [knots]="knots"
+      [currentKnot]="currentKnot"
+      (knotSelected)="selectKnot($event)"
+      (knotCreated)="handleKnotCreated($event)"
+      (knotDeleted)="handleKnotDeleted($event)"
+    ></app-time-thread>
+  </div>
+</div>
+
+<!-- Loading state -->
+<div *ngIf="loading" class="workspace-loading">
+  <div class="spinner"></div>
+  <p>Loading workspace...</p>
+</div>
+
+<!-- Error state -->
+<div *ngIf="error && !loading" class="workspace-error">
+  <h2>⚠️ Error</h2>
+  <p>{{ error }}</p>
+  <button class="btn-primary" (click)="goBackToProjects()">
+    Go Back to Projects
+  </button>
+</div>
