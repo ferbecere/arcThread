@@ -6,6 +6,7 @@ import { CdkDrag, CdkDragEnd } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-faction-card',
+  standalone:true,
   imports: [CommonModule, CdkDrag ],
   templateUrl: './faction-card.component.html',
   styleUrl: './faction-card.component.css'

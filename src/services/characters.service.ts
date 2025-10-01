@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { SupabaseService } from "./supabase.service";
 import { Character, CharacterBase, CharacterSnapshot, CreateCharacterDto } from "../models/character.model";
-import { supabase } from "../app/supabaseClient"
 import { Position } from '../models/canvas-entity.model';
+import { SupabaseService } from "./supabase.service";
 
 @Injectable({
     providedIn: 'root'

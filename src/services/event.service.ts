@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Event, CreateEventDto } from "../models/event.model";
-import { supabase} from "../app/supabaseClient";
 import { Position } from "../models/canvas-entity.model";
+import { SupabaseService } from "./supabase.service";
 
 @Injectable({
   providedIn: 'root'

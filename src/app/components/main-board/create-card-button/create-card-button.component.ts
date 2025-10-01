@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-card-button',
+  standalone:true,
   imports: [CommonModule],
   templateUrl: './create-card-button.component.html',
   styleUrl: './create-card-button.component.css'

@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core"
 import { Faction, FactionBase, FactionSnapshot, CreateFactionDto } from "../models/faction.model";
-import {supabase} from "../app/supabaseClient";
 import { SupabaseService } from './supabase.service';
 import { Position } from '../models/canvas-entity.model';
 

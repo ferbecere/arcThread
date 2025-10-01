@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
-import { MainBoardComponent } from '../home/main-board/main-board.component';
-import { TimeThreadComponent } from '../home/time-thread/time-thread.component';
-import { LeftSidebarComponent } from '../home/sidebars/left-sidebar/left-sidebar.component';
-import { RightSidebarComponent } from '../home/sidebars/right-sidebar/right-sidebar.component';
+import { MainBoardComponent } from '../components/main-board/main-board.component';
+import { TimeThreadComponent } from '../components/time-thread/time-thread.component';
+import { LeftSidebarComponent } from '../components/sidebars/left-sidebar/left-sidebar.component';
+import { RightSidebarComponent } from '../components/sidebars/right-sidebar/right-sidebar.component';
 
 import { ProjectService } from '../../services/project.service';
 import { KnotService } from '../../services/knot.service';
