@@ -1,20 +1,15 @@
-<div 
-class="event-node"
- cdkDrag
- [style.left.px]="item.position?.x"
- [style.top.px]="item.position?.y"
- [class.colliding]="item.colliding"
- (cdkDragEnded)="onDragEnd($event)">
-
-    <p class="title">{{item.title}}</p>
-    <p *ngIf="item.act">Act:{{item.act}}</p>
-    <p *ngIf="item.chapter || item.year">
-        {{item.chapter? 'Cap:' + item.chapter: ''}}{{item.year ? 'Year:' + item.year: ''}} 
-        <!-- esta parte deberia mostrarse en otras partes creo. poma -->
-    </p>
-    <!-- <img *ngIf="imageUrl" [src]="imageUrl" alt="{{title}}"/> -->
-    <p class="description" *ngIf="item.description">{{item.description}}</p>
-    <span *ngIf="item.key_event" class="key-event">Key Event!</span>
-    
+<div class="event-node" [class.colliding]="item.colliding">
+  <div class="event-header">
+    <h4>{{ item.title }}</h4>
+    <span class="key-badge" *ngIf="item.key_event">⭐ Key Event</span>
+  </div>
+  
+  <p *ngIf="item.description" class="event-description">
+    {{ item.description }}
+  </p>
+  
+  <div class="event-actions">
+    <button (click)="onEdit()" title="Edit">✏️</button>
+    <button (click)="onDelete()" class="btn-danger" title="Delete">🗑️</button>
+  </div>
 </div>
-

@@ -1,25 +1,30 @@
-<div class="faction-card"
- cdkDrag
- [style.left.px]="item.position?.x"
- [style.top.px]="item.position?.y"
- [class.colliding]="item.colliding"
- (cdkDragEnded)="onDragEnd($event)"
->
-  
-  <img *ngIf="item.symbol_url"/>
+<div class="faction-card" [class.colliding]="item.colliding">
+  <div class="faction-header">
+    <img *ngIf="item.symbol_url" [src]="item.symbol_url" alt="Symbol" class="faction-symbol">
+    <h4>{{ item.name }}</h4>
+  </div>
 
-  <h3>{{ item.name }}</h3>
+  <p *ngIf="item.alt_names?.length" class="alt-names">
+    Also known as: {{ item.alt_names?.join(', ') }}
+  </p>
 
-  <p *ngIf="item.alt_names?.length">Alt Names: {{ item.alt_names?.join(', ') }}</p>
+  <p *ngIf="item.description_culture" class="description">
+    <strong>Culture:</strong> {{ item.description_culture }}
+  </p>
 
-  <p *ngIf="item.description_culture">Culture: {{ item.description_culture }}</p>
-  <p *ngIf="item.description_territory">Territory: {{ item.description_territory }}</p>
-  <p *ngIf="item.description_technology">Technology: {{ item.description_technology }}</p>
+  <p *ngIf="item.description_territory" class="description">
+    <strong>Territory:</strong> {{ item.description_territory }}
+  </p>
 
-  <p *ngIf="item.motivation">Motivation: {{ item.motivation }}</p>
+  <p *ngIf="item.motivation" class="description">
+    <strong>Motivation:</strong> {{ item.motivation }}
+  </p>
 
-  <p *ngIf="item.leaders?.length">Leaders: {{ item.leaders?.join(', ') }}</p>
-  <p *ngIf="item.characters_associated?.length">Characters Associated: {{ item.characters_associated?.join(', ') }}</p>
+  <!-- ELIMINAMOS leaders y characters_associated temporalmente -->
+  <!-- TODO: Implementar después con relationships service -->
 
-
+  <div class="faction-actions">
+    <button (click)="onEdit()" title="Edit">✏️</button>
+    <button (click)="onDelete()" class="btn-danger" title="Delete">🗑️</button>
+  </div>
 </div>
