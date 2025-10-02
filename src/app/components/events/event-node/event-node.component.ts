@@ -15,11 +15,14 @@ export class EventNodeComponent {
   @Input() item!: EventModel;
 
   @Output() dragEnd = new EventEmitter<{x:number, y:number, item:EventModel}>();
+  @Output() delete = new EventEmitter<EventModel>();
 
   onDragEnd(event:CdkDragEnd){
     const pos = event.source.getFreeDragPosition();
     this.dragEnd.emit({x:pos.x, y:pos.y, item: this.item});
   }
-
-}
+  onDelete(): void {
+      this.delete.emit(this.item);
+    }
+  }
 

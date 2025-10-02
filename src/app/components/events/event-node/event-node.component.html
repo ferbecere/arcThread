@@ -1,4 +1,6 @@
-<div class="event-node" [class.colliding]="item.colliding">
+<div class="event-node"
+cdkDrag
+ [class.colliding]="item.colliding">
   <div class="event-header">
     <h4>{{ item.title }}</h4>
     <span class="key-badge" *ngIf="item.key_event">⭐ Key Event</span>
@@ -9,7 +11,7 @@
   </p>
   
   <div class="event-actions">
-    <button (click)="onEdit()" title="Edit">✏️</button>
+    <!-- <button (click)="onEdit()" title="Edit">✏️</button> lo haremos desde la columna derecha -->
     <button (click)="onDelete()" class="btn-danger" title="Delete">🗑️</button>
   </div>
 </div>

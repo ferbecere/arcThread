@@ -21,6 +21,7 @@ import { Event as EventModel, CreateEventDto } from '../../../models/event.model
 import { Faction, CreateFactionDto } from '../../../models/faction.model';
 import { Knot } from '../../../models/knot.model';
 import { Project } from '../../../models/project.model';
+import { CanvasCard } from '../../../models';
 
 @Component({
   selector: 'app-main-board',
@@ -136,7 +137,6 @@ export class MainBoardComponent implements OnInit, OnDestroy {
       this.canvasState.setFactions(factionsWithPos);
       this.canvasState.setEvents(eventsWithPos);
 
-      this.canvasState.checkCollisions();
 
     } catch (err: any) {
       console.error('Error loading knot data:', err);
@@ -173,7 +173,6 @@ export class MainBoardComponent implements OnInit, OnDestroy {
         break;
     }
 
-    this.canvasState.checkCollisions();
   }
 
   // ===== MODAL =====
@@ -346,7 +345,7 @@ export class MainBoardComponent implements OnInit, OnDestroy {
   openDetails(item: Character | Faction | EventModel) {
     this.selectedItem = item;
     this.showDetailsPanel = true;
-    this.canvasState.selectCard(item);
+    this.canvasState.selectCard(item as CanvasCard);
   }
 
   closeDetails() {

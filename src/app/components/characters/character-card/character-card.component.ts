@@ -14,13 +14,18 @@ import { CdkDrag, CdkDragEnd } from '@angular/cdk/drag-drop';
 export class CharacterCardComponent {
   @Input() item!: Character;
 
+  @Output() delete = new EventEmitter<Character>();
   @Output() dragEnd = new EventEmitter<{x:number, y:number, item:Character}>();
 
   onDragEnd(event:CdkDragEnd<any>){
       const pos = event.source.getFreeDragPosition();
       this.dragEnd.emit({x: pos.x, y: pos.y, item: this.item});
   }
+  onDelete(): void {
+      this.delete.emit(this.item);
+    }
+  }
 
-}
+
 
 

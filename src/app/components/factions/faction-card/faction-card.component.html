@@ -1,4 +1,6 @@
-<div class="faction-card" [class.colliding]="item.colliding">
+<div class="faction-card"
+cdkDrag
+ [class.colliding]="item.colliding">
   <div class="faction-header">
     <img *ngIf="item.symbol_url" [src]="item.symbol_url" alt="Symbol" class="faction-symbol">
     <h4>{{ item.name }}</h4>
@@ -24,7 +26,7 @@
   <!-- TODO: Implementar después con relationships service -->
 
   <div class="faction-actions">
-    <button (click)="onEdit()" title="Edit">✏️</button>
+    <!-- <button (click)="onEdit()" title="Edit">✏️</button> lo haremos desde la columna derecha -->
     <button (click)="onDelete()" class="btn-danger" title="Delete">🗑️</button>
   </div>
 </div>

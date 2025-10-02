@@ -18,6 +18,9 @@
     <p *ngIf="item.biography_development">Bio:{{item.biography_development}} </p>
     <p *ngIf="item.appearance">Appearance:{{item.appearance}} </p>
     
+    <div class="character-actions">
+    <button (click)="onDelete()" class="btn-danger" title="Delete">🗑️</button>
+  </div>
 </div>
 
 

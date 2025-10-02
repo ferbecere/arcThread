@@ -32,7 +32,7 @@ export class CanvasStateService {
   }
 
   get allCards(): CanvasCard[] {
-    return [...this.characters, ...this.factions, ...this.events];
+    return [...this.characters, ...this.factions, ...this.events] as CanvasCard[];
   }
 
   setCharacters(characters: Character[]): void {
@@ -101,46 +101,5 @@ export class CanvasStateService {
     this.factionsSubject.next([]);
     this.eventsSubject.next([]);
     this.selectedCardSubject.next(null);
-  }
-
-  // Detección de colisiones
-  checkCollisions(): void {
-    const allCards = this.allCards;
-    
-    // Reset colliding flags
-    allCards.forEach(card => {
-      card.colliding = false;
-    });
-
-    // Check collisions
-    for (let i = 0; i < allCards.length; i++) {
-      for (let j = i + 1; j < allCards.length; j++) {
-        if (this.isColliding(allCards[i], allCards[j])) {
-          allCards[i].colliding = true;
-          allCards[j].colliding = true;
-        }
-      }
-    }
-
-    // Update subjects
-    this.charactersSubject.next(this.characters);
-    this.factionsSubject.next(this.factions);
-    this.eventsSubject.next(this.events);
-  }
-
-  private isColliding(a: CanvasCard, b: CanvasCard): boolean {
-    if (!a.position || !b.position) return false;
-
-    const widthA = a.width ?? 120;
-    const heightA = a.height ?? 160;
-    const widthB = b.width ?? 120;
-    const heightB = b.height ?? 160;
-
-    return !(
-      a.position.x + widthA < b.position.x ||
-      a.position.x > b.position.x + widthB ||
-      a.position.y + heightA < b.position.y ||
-      a.position.y > b.position.y + heightB
-    );
   }
 }

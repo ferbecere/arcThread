@@ -15,11 +15,15 @@ export class FactionCardComponent {
   @Input() item! : Faction;
 
   @Output() dragEnd = new EventEmitter<{x:number, y:number, item:Faction}>();
+  @Output() delete = new EventEmitter<Faction>();
 
   onDragEnd(event: CdkDragEnd){
     const pos = event.source.getFreeDragPosition();
     this.dragEnd.emit({x:pos.x, y:pos.y, item: this.item});
   }
+  onDelete(): void {
+  this.delete.emit(this.item);
+}
 
 }
 
